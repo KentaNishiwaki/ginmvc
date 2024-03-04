@@ -22,7 +22,7 @@ This framework integrates MVC-developing patterns to build a REVELful web applic
 
 ### Start the web server:
 
-   go run -a ginmvc
+    go run -a ginmvc
 
 ### Go to http://localhost:8080/ and you'll see:
 
