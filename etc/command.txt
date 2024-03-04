@@ -1,0 +1,38 @@
+#Raspberry Pi 5用にコンパイル
+$ GOOS=linux GOARCH=arm64 go build -o ginmvc.bin
+
+
+# Raspberry Pi 5用に転送
+$ scp -r ../ginmvc validcode@192.168.32.201:~/app
+
+#Raspberry Pi 5で実行
+$ validcode@raspberrypi5:~/app $ ./ginmvc.bin
+
+
+#プロセスの検索
+$ ps -Af | grep gin
+
+#プロセスの終了
+$ kill 1985
+
+
+#自動起動
+#ginmvc.serviceを/etc/systemd/systemにコピー
+$ sudo mv ginmvc.service /etc/systemd/system/
+$ sudo chmod 644 /etc/systemd/system/ginmvc.service
+$ sudo systemctl daemon-reload
+
+#自動起動を設定
+$ sudo systemctl enable ginmvc
+
+#起動
+$ sudo systemctl start ginmvc
+
+#終了
+$ sudo systemctl stop ginmvc
+
+#確認
+$ sudo systemctl status ginmvc.service
+
+$ sudo chmod 744 sh/reboot.sh
+$ sudo chmod 744 sh/shutdown.sh

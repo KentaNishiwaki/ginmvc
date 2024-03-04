@@ -1,0 +1,13 @@
+[Unit]
+Description=ginmvc
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/validcode/app/ginmvc
+ExecStart=/home/validcode/app/ginmvc/ginmvc.bin
+TimeoutStopSec=5
+StandardOutput=null
+
+[Install]
+WantedBy = multi-user.target

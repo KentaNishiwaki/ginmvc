@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{.datas.Title}}</title>
+	</head>
+	<body>
+		{{if .datas.DevMode}}
+			{{template "debug.html" .}}
+		{{end}}
+		{{if .datas.Error}}
+		<h1>
+			{{.datas.Title}}
+		</h1>
+		<p>
+			{{.datas.Description}}
+		</p>
+		{{end}}
+	</body>
+</html>

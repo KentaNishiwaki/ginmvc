@@ -1,0 +1,27 @@
+{{template "header.html" .}}
+
+<header class="jumbotron bg-primary">
+  <div class="container">
+    <div class="row">
+      <h1>What time is it? Game time!</h1>
+      <p></p>
+    </div>
+  </div>
+</header>
+
+<form method="post">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        {{template "flash.html" .}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6">
+        <input type="submit" formaction="/shutdown" name="shutdown" value="Off" class="btn btn-danger" />
+        <input type="submit" formaction="/reboot" name="reboot" value="restart" class="btn btn-warning" />
+      </div>
+    </div>
+  </div>
+</form>
+{{template "footer.html" .}}
