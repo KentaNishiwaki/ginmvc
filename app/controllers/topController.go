@@ -7,8 +7,12 @@ import (
 )
 
 func ShowTop(c *gin.Context) {
-	datas := models.GetAll()
-	datas.DevMode = false
+	user, err := models.NewLoginUser(c)
+	if err != nil {
+		c.HTML(200, "Login.html", gin.H{"datas": models.GetNoUser()})
+		return
+	}
+	datas := models.GetAll(user)
 	c.HTML(200, "Index.html", gin.H{"datas": datas})
 }
 

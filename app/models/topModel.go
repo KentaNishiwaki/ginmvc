@@ -7,14 +7,24 @@ import (
 )
 
 type TopPageData struct {
+	User        *LoginUser
 	Title       string
 	Description string
 	Error       bool
 	DevMode     bool
 }
 
-func GetAll() (datas TopPageData) {
+func GetAll(user *LoginUser) (datas TopPageData) {
+	datas.User = user
 	datas.Title = "Raspberry Pi App"
+	datas.Error = false
+	datas.DevMode = false
+	return
+}
+
+func GetNoUser() (datas TopPageData) {
+	datas.User = &LoginUser{}
+	datas.Title = "App Login"
 	datas.Error = false
 	datas.DevMode = false
 	return

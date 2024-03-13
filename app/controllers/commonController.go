@@ -9,18 +9,18 @@ import (
 )
 
 func ShowNoRoute(c *gin.Context) {
-	datas := models.GetAll()
-	datas.DevMode = true
-	datas.Error = true
+	datas := models.GetNoUser()
 	datas.Description = "Page not found"
+	datas.Error = true
+	fmt.Printf("ShowNoRoute\n")
 	c.HTML(200, "404.html", gin.H{"datas": datas})
 }
 
 func ShowNoMethod(c *gin.Context) {
-	datas := models.GetAll()
-	datas.DevMode = true
-	datas.Error = true
+	datas := models.GetNoUser()
 	datas.Description = "Method not allowed"
+	datas.Error = true
+	fmt.Printf("ShowNoMethod\n")
 	c.HTML(200, "404.html", gin.H{"datas": datas})
 }
 
