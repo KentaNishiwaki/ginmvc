@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="jp-JP">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{.datas.Title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-5.3.3.min.css">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.jpg">
-    <script src="/public/js/bootstrap-5.3.3.min.js"></script>
-    {{range .moreStyles}}
-      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+
+    <link href="/public/css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="/public/js/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/jquery-3.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+  
+    {{range $css := .formdata.MoreStyles}}
+      <link rel="stylesheet" type="text/css" href="/public/css/{{$css}}">
     {{end}}
-    {{range .moreScripts}}
-      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{range $js := .formdata.MoreModule}}
+      <script src="/public/js/{{$js}}" type="module"></script>
     {{end}}
+    {{range $js := .formdata.MoreScripts}}
+      <script src="/public/js/{{$js}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
+    
   </head>
   <body>

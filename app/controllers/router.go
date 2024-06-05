@@ -1,7 +1,10 @@
 package controllers
 
 import (
-	"fmt"
+	"ginmvc/app/models"
+	"log"
+
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,20 +15,43 @@ func GetRouter() *gin.Engine {
 	r.Static("/public", "./public")
 	r.LoadHTMLGlob("app/views/*/*.html")
 
+	var config models.Config
+	config, err := config.LoadConfigForYaml()
+	if err != nil {
+		log.Fatal(err)
+		return r
+	}
+
+	jwt, err := newJwtMiddleware(&config)
+	if err != nil {
+		log.Fatal(err)
+		return r
+	}
+
 	r.GET("/", func(c *gin.Context) {
-		_, err := c.Cookie("user")
+		var l, err = IsHaveToken(c, jwt)
 		if err != nil {
-			fmt.Printf(err.Error() + "\n")
-			ShowLogin(c)
+			ShowLogin(c, &config, &models.LoginUser{})
 		} else {
-			ShowTop(c)
-			r.POST("/shutdown", ExecShutdown)
-			r.POST("/reboot", ExecReboot)
+			MoveTop(c, &config, l)
 		}
+
 	})
-	r.POST("/login", ExecLogin)
-	r.NoRoute(ShowNoRoute)
-	r.NoMethod(ShowNoMethod)
-	r.Use(MiddleWare)
+	r.POST("/", SetConfigJWT(ExecLogin, &config, jwt))
+
+	api := r.Group("/api", jwt.MiddlewareFunc())
+	{
+		api.Use(handlerMiddleWare(jwt))
+		api.GET("/getkvMicrowave", SetConfig(GetKvMicrowave, &config))
+		api.GET("/getHighFrequency", SetConfig(GetHighFrequency, &config))
+
+	}
+	r.POST("/reboot", SetConfig(ExecReboot, &config))
+	r.GET("/user", SetConfigUser(ShowLogin, &config, &models.LoginUser{}))
+	r.POST("/shutdown", SetConfig(ExecShutdown, &config))
+	r.NoRoute(SetConfig(ShowNoRoute, &config))
+	r.NoMethod(SetConfig(ShowNoMethod, &config))
+	r.Use(SetConfig(MiddleWare, &config))
+	r.Run(":" + strconv.Itoa(config.App.Port))
 	return r
 }

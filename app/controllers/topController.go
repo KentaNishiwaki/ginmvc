@@ -2,26 +2,38 @@ package controllers
 
 import (
 	"ginmvc/app/models"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func ShowTop(c *gin.Context) {
-	user, err := models.NewLoginUser(c)
+func ShowTop(c *gin.Context, config *models.Config) {
+	user, err := models.NewLoginUser(c, config)
 	if err != nil {
-		c.HTML(200, "Login.html", gin.H{"datas": models.GetNoUser()})
+		c.HTML(http.StatusOK, "Login.html", gin.H{"formdata": models.GetNoUser(config, user)})
 		return
 	}
-	datas := models.GetAll(user)
-	c.HTML(200, "Index.html", gin.H{"datas": datas})
 }
 
-func ExecShutdown(c *gin.Context) {
-	go models.ExecShutdown()
-	c.Redirect(301, "/")
+func MoveTop(c *gin.Context, config *models.Config, user *models.LoginUser) {
+	formdata := models.GetAll(user, config)
+	c.HTML(http.StatusOK, "Index.html", gin.H{"formdata": formdata})
 }
 
-func ExecReboot(c *gin.Context) {
-	go models.ExecReboot()
-	c.Redirect(301, "/")
+func ExecShutdown(c *gin.Context, config *models.Config) {
+	go models.ExecShutdown(config)
+	c.Redirect(http.StatusMovedPermanently, "/")
+}
+
+func ExecReboot(c *gin.Context, config *models.Config) {
+	go models.ExecReboot(config)
+	c.Redirect(http.StatusMovedPermanently, "/")
+}
+func GetKvMicrowave(c *gin.Context, config *models.Config) {
+	json := models.GetMicroWaveJSON(config, c.Query("selDate"))
+	c.SecureJSON(http.StatusOK, json)
+}
+func GetHighFrequency(c *gin.Context, config *models.Config) {
+	json := models.GetHighFrequencyJSON(config, c.Query("selDate"))
+	c.SecureJSON(http.StatusOK, json)
 }

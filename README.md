@@ -12,13 +12,14 @@ Target OS  : Linux
              Windows 11
              macOS
 
-Framework  : Gin (Go language)
+Framework  : Gin (Go language),gin-jwt/v2,yaml.v3, gorm,gorm/mysql,AdminKit v3.4.0,Bootstrap v5.3,Chart.js v2.9.4,jQuery v3.7.1
 
 # Welcome to ginmvc
 
 A high-productivity web framework for the [Go language](http://www.golang.org/).
 This MVC framework based on [Gin](https://github.com/gin-gonic/gin).
 This framework integrates MVC-developing patterns to build a REVELful web application.
+The current trend of developing web applications using JTW, GORM(MariaDB),Chart.js,Bootstrap, AJAX with token, and AdminKit
 
 ### Start the web server:
 
@@ -26,7 +27,7 @@ This framework integrates MVC-developing patterns to build a REVELful web applic
 
 ### Go to http://localhost:8080/ and you'll see:
 
-    "Whatb time is it? Game time!"
+    "What time is it? Game time!"
 
 ## Code Layout
 
@@ -34,25 +35,23 @@ The directory structure of a generated this application:
 
     app/              App sources
         controllers/  App controllers and router go here
-        views/        Templates directory
         models/       Business Logic go here
-    conf/             Configuration directory
-        app.conf      Main app configuration file
-        routes        Routes definition file
-
-
-    messages/         Message files
-
+        views/        Templates directory
+            App/      Main View
+            base/     header,footer etc. Common html
+            errors/   Error View
+    config/             Configuration directory
+        config.yml      Main app configuration file
     public/           Public static assets
         css/          CSS files
         js/           Javascript files
-        images/       Image files
+        img/       Image files
     go.mod        go.mod
     main.go       Interceptor registration
 
 
 # License
-[LICENSE] TRANSDICOM Copyright (C) 2023-2024 Valid Code Co., Ltd
+[LICENSE] GINMVC Copyright (C) 2023-2024 Valid Code Co., Ltd
 
 This software is licensed under the Attribution-NonCommercial 4.0 International License (NonCommercial CC)
 

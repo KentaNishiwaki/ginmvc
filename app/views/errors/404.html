@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>{{.datas.Title}}</title>
+		<title>{{.formdata.Title}}</title>
 	</head>
 	<body>
-		{{if .datas.DevMode}}
+		{{if .formdata.DevMode}}
 			{{template "debug.html" .}}
 		{{end}}
-		{{if .datas.Error}}
+		{{if .formdata.Error}}
 		<h1>
-			[404.html]{{.datas.Title}}
+			[404.html]{{.formdata.Title}}
 		</h1>
 		<p>
-			{{.datas.Description}}
+			{{.formdata.Description}}
 		</p>
 		{{end}}
 	</body>

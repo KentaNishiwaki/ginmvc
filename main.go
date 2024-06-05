@@ -5,6 +5,5 @@ import (
 )
 
 func main() {
-	router := controllers.GetRouter()
-	router.Run(":8080")
+	controllers.GetRouter()
 }

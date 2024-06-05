@@ -9,7 +9,7 @@
   </div>
 </header>
 
-<form method="post">
+<form method="post" action="/">
   <div class="container">
     <div class="row">
       <div class="span6">
@@ -19,19 +19,14 @@
 
     <div class="mb-3">
       <label for="inputEmail" class="form-label">User ID</label>
-      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+      <input type="email" class="form-control" name="inputEmail" aria-describedby="emailHelp" value="{{.formdata.User.Email}}">
       <div id="emailHelp" class="form-text">メールアドレスを入力して下さい</div>
     </div>
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword">
+      <input type="password" class="form-control" name="inputPassword">
     </div>
-<!--     <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
- -->
-     <button type="submit" class="btn btn-primary" formaction="/login" name="login">login</button>
+     <button type="submit" class="btn btn-primary" name="login">login</button>
   </div>
 </form>
 {{template "footer.html" .}}
