@@ -1,0 +1,29 @@
+app :
+  name : ginmvc
+  addr : localhost
+  port : 8080
+  ssl : false
+
+jwt :
+  realm : ginmvc
+  key : SecretKey
+  timeout : 3  #minute
+  maxRefresh : 1440 #minute
+  sendCookie : true
+  tokenLookup : query:token # cookie:jwt
+  signingAlgorithm : HS256
+  tokenHeadName : Bearer
+  cookieName : jwt
+
+
+# dbの接続情報に関する設定
+db :  
+  # dbドライバ
+  dbDriver : mysql
+  # db接続文字列
+  dsn : root:GameT!me0106@tcp(127.0.0.1:3306)/logdb?charset=utf8&parseTime=True&loc=Local
+  defaultStringSize:         256  #  default size for string fields
+  disableDatetimePrecision:  true  #  disable datetime precision, which not supported before MySQL 5.6
+  dontSupportRenameIndex:    true #  drop & create when rename index, rename index not supported before MySQL 5.7, MariaDB
+  dontSupportRenameColumn:   true #  `change` when rename column, rename column not supported before MySQL 8, MariaDB
+  skipInitializeWithVersion: false #  auto configure based on currently MySQL version
