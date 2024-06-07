@@ -18,7 +18,7 @@ jwt :
 
 db :  
   dbDriver : mysql
-  dsn : root:GameT!me0106@tcp(127.0.0.1:3306)/logdb?charset=utf8&parseTime=True&loc=Local
+  dsn : root:password@tcp(127.0.0.1:3306)/logdb?charset=utf8&parseTime=True&loc=Local
   defaultStringSize:         256  #  default size for string fields
   disableDatetimePrecision:  true  #  disable datetime precision, which not supported before MySQL 5.6
   dontSupportRenameIndex:    true #  drop & create when rename index, rename index not supported before MySQL 5.7, MariaDB
